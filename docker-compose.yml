@@ -1,0 +1,80 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: sampah-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ecocash
+      MYSQL_USER: ecocash
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  ai:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: sampah-ai
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health').read()",
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sampah-app
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ai:
+        condition: service_healthy
+    env_file:
+      - .env.docker
+    environment:
+      APP_KEY: base64:RD3HI5s8raEz1j4A3Z23Obxx28V3Bw6mF8g1GLqJxhA=
+      APP_URL: http://localhost:8000
+      DB_HOST: mysql
+      DB_DATABASE: ecocash
+      DB_USERNAME: ecocash
+      DB_PASSWORD: secret
+      AI_SERVICE_URL: http://ai:8001
+    ports:
+      - "8000:8000"
+    command: >
+      bash -lc "test -f .env || cp .env.docker .env; php artisan key:generate --force || true; php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  mysql_data:

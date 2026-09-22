@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+class Partner extends Model { protected $guarded = []; protected $casts = ['is_active'=>'boolean']; public function categories() { return $this->belongsToMany(WasteCategory::class,'partner_waste_categories'); } }
