@@ -5,6 +5,7 @@ ECOCASH adalah platform digital berbasis web yang mengubah sampah yang sudah dip
 ## Problem Statement
 
 Indonesia masih menghadapi masalah besar dalam pengelolaan sampah rumah tangga dan skala komunitas:
+
 - banyak sampah tercampur dan tidak tertata
 - masyarakat kesulitan mengetahui nilai ekonomis dari sampah yang mereka kumpulkan
 - proses pemantauan dan validasi transaksi masih belum terdigitalisasi
@@ -15,6 +16,7 @@ ECOCASH hadir sebagai solusi untuk menghubungkan masyarakat, bank sampah, dan mi
 ## Solusi
 
 ECOCASH menyediakan:
+
 - sistem dashboard untuk pengguna, admin, dan mitra
 - pencatatan transaksi sampah berbasis saldo ECOPOINT
 - proses pemindaian sampah menggunakan AI untuk mengklasifikasikan jenis sampah
@@ -54,6 +56,7 @@ docker compose up --build -d
 ```
 
 Setelah dijalankan, aplikasi akan tersedia pada:
+
 - Aplikasi web: http://localhost:8000
 - Health check AI: http://localhost:8001/health
 - Database MySQL: localhost:3307
@@ -143,6 +146,7 @@ Model AI untuk klasifikasi sampah berada di folder `ai-service/models/` dan API 
 ## Roadmap
 
 Tahap berikutnya untuk pengembangan lebih lanjut:
+
 - peningkatan dashboard analitik real-time
 - validasi mitra dan admin workflow lebih lengkap
 - optimasi model AI untuk akurasi klasifikasi sampah
