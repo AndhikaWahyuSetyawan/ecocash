@@ -1,63 +1,106 @@
 # ECOCASH
 
-ECOCASH is a Laravel 12 + Livewire application for turning sorted waste into auditable ECOPOINT value. The project includes a Laravel web app, a MySQL database, and a FastAPI AI service for waste classification.
+ECOCASH adalah platform digital berbasis web yang mengubah sampah yang sudah dipilah menjadi nilai ekonomi yang terukur melalui sistem ECOPOINT. Aplikasi ini menggabungkan Laravel, Livewire, MySQL, dan AI Vision untuk mengotomatisasi proses sortir sampah, penghitungan nilai, serta pendokumentasian transaksi secara transparan.
 
-## Quick start with Docker
+## Problem Statement
 
-Requirements:
+Indonesia masih menghadapi masalah besar dalam pengelolaan sampah rumah tangga dan skala komunitas:
+- banyak sampah tercampur dan tidak tertata
+- masyarakat kesulitan mengetahui nilai ekonomis dari sampah yang mereka kumpulkan
+- proses pemantauan dan validasi transaksi masih belum terdigitalisasi
+- bank sampah dan mitra belum memiliki sistem yang memudahkan verifikasi dan pemberian insentif
 
-- Docker Desktop / Docker Engine
+ECOCASH hadir sebagai solusi untuk menghubungkan masyarakat, bank sampah, dan mitra dalam ekosistem daur ulang yang lebih efisien dan terukur.
+
+## Solusi
+
+ECOCASH menyediakan:
+- sistem dashboard untuk pengguna, admin, dan mitra
+- pencatatan transaksi sampah berbasis saldo ECOPOINT
+- proses pemindaian sampah menggunakan AI untuk mengklasifikasikan jenis sampah
+- validasi kategori sampah dan nilai ekonomi per kilogram
+- sistem reward dan histori transaksi yang transparan
+- ekosistem yang mendorong perilaku memilah sampah sejak dari rumah
+
+## Fitur Utama
+
+- Login dan role-based access untuk admin, user, dan partner
+- AI classification untuk sampah berbasis model YOLO
+- Pencatatan deposit sampah dan saldo ECOPOINT
+- Kelola bank sampah dan mitra
+- Riwayat transaksi dan reward
+- Dashboard ekologi dan dampak lingkungan
+
+## Teknologi yang Digunakan
+
+- Laravel 12
+- Livewire 3
+- MySQL
+- FastAPI
+- Ultralytics / YOLO
 - Docker Compose
 
-### 1) Start the full stack
+## Quick Start dengan Docker
+
+### Persyaratan
+
+- Docker Desktop atau Docker Engine
+- Docker Compose
+
+### 1) Jalankan seluruh stack
 
 ```bash
 docker compose up --build -d
 ```
 
-This starts:
+Setelah dijalankan, aplikasi akan tersedia pada:
+- Aplikasi web: http://localhost:8000
+- Health check AI: http://localhost:8001/health
+- Database MySQL: localhost:3307
 
-- Laravel app: http://localhost:8000
-- AI service: http://localhost:8001/health
-- MySQL: localhost:3307
-
-### 2) Seed the database
+### 2) Seed database
 
 ```bash
 docker compose exec app php artisan migrate --seed
 ```
 
-If the app needs a fresh key:
+Jika aplikasi membutuhkan APP_KEY baru:
 
 ```bash
 docker compose exec app php artisan key:generate --force
 ```
 
-### 3) Stop the stack
+### 3) Matikan stack
 
 ```bash
 docker compose down
 ```
 
-To delete the persistent database volume:
+Jika ingin menghapus data database yang tersimpan:
 
 ```bash
 docker compose down -v
 ```
 
-## Default login
+## Login Default
 
-The seeded demo accounts are created when you run the migration seeder.
-
-Use one of these accounts:
+Akun demo yang tersedia setelah proses seeding:
 
 - Admin: `admin@ecocash.test` / `password`
 - User: `user@ecocash.test` / `password`
 - Partner: `partner@ecocash.test` / `password`
 
-## Local development (without Docker)
+## Pengembangan Lokal (Tanpa Docker)
 
-Requirements: PHP 8.3+, Composer, Node/npm, MySQL 8+, Python 3.11+
+### Persyaratan
+
+- PHP 8.3+
+- Composer
+- Node/npm
+- MySQL 8+
+- Python 3.11+
+
+### Langkah
 
 ```bash
 composer install
@@ -69,7 +112,7 @@ npm run build
 php artisan serve
 ```
 
-## AI service
+## AI Service
 
 ```bash
 cd ai-service
@@ -80,14 +123,32 @@ python scripts/download_model.py
 uvicorn app.main:app --host 0.0.0.0 --port 8001
 ```
 
-The AI service reads the YOLO model under `ai-service/models/` and exposes the classification API on port `8001`.
+Model AI untuk klasifikasi sampah berada di folder `ai-service/models/` dan API service akan berjalan pada port `8001`.
 
-## Notes
+## Struktur Project
 
-- The Docker configuration uses `.env.docker` for the app container environment.
-- MySQL is exposed on port `3307` on the host to avoid conflicts with local MySQL services.
-- The AI model file is not committed to Git; ensure it is available in the `ai-service/models/` directory before running the inference service.
+- `app/` : logika aplikasi Laravel dan Livewire
+- `database/` : migration dan seeder
+- `routes/` : routing aplikasi
+- `resources/` : view dan frontend assets
+- `ai-service/` : backend AI untuk klasifikasi sampah
+- `docker-compose.yml` : konfigurasi stack Docker
 
-## Scope note
+## Catatan Penting
 
-This repository is an MVP. The next implementation stages include deeper admin flows, partner approval, analytics, and additional integration coverage before treating it as a complete production system.
+- Konfigurasi Docker aplikasi menggunakan `.env.docker`
+- Port MySQL di-host dipindahkan ke `3307` agar tidak bentrok dengan MySQL lokal yang sudah berjalan
+- File model AI tidak disimpan di Git, pastikan model tersedia di `ai-service/models/`
+
+## Roadmap
+
+Tahap berikutnya untuk pengembangan lebih lanjut:
+- peningkatan dashboard analitik real-time
+- validasi mitra dan admin workflow lebih lengkap
+- optimasi model AI untuk akurasi klasifikasi sampah
+- integrasi transaksi berbasis blockchain / ledger terverifikasi
+- fitur edukasi lingkungan dan gamifikasi reward
+
+## Kesimpulan
+
+ECOCASH adalah solusi digital yang menggabungkan teknologi lingkungan, ekonomi circular, dan kecerdasan buatan untuk mendorong perubahan perilaku masyarakat dalam memilah dan mengelola sampah secara lebih cerdas, efisien, dan bermanfaat. Project ini dirancang untuk menjadi solusi yang menarik untuk kompetisi hackathon karena menggabungkan nilai sosial, dampak lingkungan, dan inovasi teknologi yang nyata.
