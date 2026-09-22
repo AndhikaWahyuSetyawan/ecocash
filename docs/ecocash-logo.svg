@@ -1,0 +1,39 @@
+<svg width="640" height="220" viewBox="0 0 640 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#E6FFF4"/>
+      <stop offset="100%" stop-color="#D9F7E8"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="220" rx="24" fill="url(#bg)"/>
+
+  <g transform="translate(30,25)">
+    <circle cx="85" cy="85" r="72" fill="url(#ring)" opacity="0.18"/>
+    <circle cx="85" cy="85" r="58" stroke="url(#ring)" stroke-width="8" fill="none"/>
+
+    <path d="M51 102C62 86 78 75 96 67C113 60 129 58 147 61" stroke="#16A34A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M120 47L147 61L130 87" stroke="#16A34A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M88 54C77 66 68 77 61 91C51 110 49 129 58 147C68 166 87 176 109 175C129 174 146 165 157 150" stroke="#0F766E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+    <circle cx="117" cy="43" r="18" fill="url(#coin)"/>
+    <path d="M117 28V58" stroke="#FEF3C7" stroke-width="4" stroke-linecap="round"/>
+    <path d="M102 43H132" stroke="#FEF3C7" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(210,68)">
+    <text x="0" y="38" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#14532D">ECO</text>
+    <text x="0" y="96" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="800" fill="#0F766E">CASH</text>
+    <rect x="0" y="120" width="210" height="10" rx="5" fill="#22C55E" opacity="0.8"/>
+    <text x="0" y="158" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600" fill="#166534">Smart Waste Economy</text>
+  </g>
+</svg>

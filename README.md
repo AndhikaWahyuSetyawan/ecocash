@@ -1,6 +1,69 @@
 # ECOCASH
 
+<div align="center">
+  <img src="docs/ecocash-logo.svg" alt="ECOCASH Logo" width="640" />
+</div>
+
+<div align="center">
+
+<p>
+  <img src="https://img.shields.io/badge/Build-Docker%20Compose-0db7ed?style=for-the-badge&logo=docker" alt="Docker Compose" />
+  <img src="https://img.shields.io/badge/Stack-Laravel%20%2B%20AI-ff2d55?style=for-the-badge" alt="Laravel AI" />
+  <img src="https://img.shields.io/badge/Impact-Environment%20%2B%20Economy-34c759?style=for-the-badge" alt="Impact" />
+</p>
+
+</div>
+
+```text
+╔══════════════════════════════════════════════════════════╗
+║            ♻️  ECOCASH  🌱  Smart Waste Economy      ║
+║      Ubah sampah jadi nilai, data, dan dampak sosial ║
+╚══════════════════════════════════════════════════════════╝
+```
+
 ECOCASH adalah platform digital berbasis web yang mengubah sampah yang sudah dipilah menjadi nilai ekonomi yang terukur melalui sistem ECOPOINT. Aplikasi ini menggabungkan Laravel, Livewire, MySQL, dan AI Vision untuk mengotomatisasi proses sortir sampah, penghitungan nilai, serta pendokumentasian transaksi secara transparan.
+
+## Why This Matters
+
+- ♻️ Mengubah sampah dari masalah menjadi aset ekonomi
+- 💰 Memberikan reward nyata dalam bentuk ECOPOINT
+- 🤖 Menggunakan AI untuk klasifikasi jenis sampah otomatis
+- 🌍 Mendorong perilaku ramah lingkungan di komunitas
+- 📊 Menyediakan data transparan untuk mitra dan admin
+
+## One-Click Deployment to Docker
+
+Deploy seluruh stack hanya dengan satu perintah:
+
+```bash
+git clone https://github.com/AndhikaWahyuSetyawan/ecocash.git
+cd ecocash
+docker compose up --build -d
+```
+
+Setelah proses selesai, aplikasi siap digunakan:
+
+- 🌐 Web app: http://localhost:8000
+- 🤖 AI service: http://localhost:8001/health
+- 🗄️ MySQL: localhost:3307
+
+### Optional: seed data / migrate
+
+```bash
+docker compose exec app php artisan migrate --seed
+```
+
+### Stop services
+
+```bash
+docker compose down
+```
+
+### Reset data
+
+```bash
+docker compose down -v
+```
 
 ## Problem Statement
 
@@ -57,9 +120,9 @@ docker compose up --build -d
 
 Setelah dijalankan, aplikasi akan tersedia pada:
 
-- Aplikasi web: http://localhost:8000
-- Health check AI: http://localhost:8001/health
-- Database MySQL: localhost:3307
+- 🌐 Aplikasi web: http://localhost:8000
+- 🤖 Health check AI: http://localhost:8001/health
+- 🗄️ Database MySQL: localhost:3307
 
 ### 2) Seed database
 
